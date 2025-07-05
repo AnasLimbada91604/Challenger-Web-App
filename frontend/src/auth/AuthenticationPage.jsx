@@ -1,7 +1,20 @@
-import React from "react";
-import { SignIn, SignUp, SignedIn, SignedOut } from "@clerk/clerk-react";
+import React, { useEffect } from "react";
+import { SignIn, SignUp, SignedIn, SignedOut, useAuth } from "@clerk/clerk-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export function AuthenticationPage() {
+  const { isSignedIn, isLoaded } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log('Auth state changed:', { isSignedIn, isLoaded, pathname: location.pathname });
+    if (isLoaded && isSignedIn) {
+      console.log('User is signed in, redirecting to dashboard...');
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isSignedIn, isLoaded, navigate, location.pathname]);
+
   return (
     <div className="auth-split">
       <div className="auth-left">
@@ -23,7 +36,7 @@ export function AuthenticationPage() {
           </SignedOut>
           <SignedIn>
             <div className="redirect-message">
-              <p>You are already signed in.</p>
+              <p>Redirecting to dashboard...</p>
             </div>
           </SignedIn>
         </div>

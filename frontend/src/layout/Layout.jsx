@@ -6,10 +6,14 @@ export function Layout() {
     return <div className="app-layout">
         <header className="app-header">
             <div className="header-content">
-                <h1>Code Challenge Generator</h1>
+                <div className="challenger-title--small">CHALLENGER</div>
                 <nav>
                     <SignedIn>
-                        <Link to="/">Generate Challenge</Link>
+                        <Link to="/dashboard">Dashboard</Link>
+                        <Link to="/portfolio">Portfolio</Link>
+                        <Link to="/watchlist">Watchlist</Link>
+                        <Link to="/news">News</Link>
+                        <Link to="/ai">AI Assistant</Link>
                         <Link to="/history">History</Link>
                         <UserButton/>
                     </SignedIn>
